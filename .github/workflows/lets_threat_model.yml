@@ -22,7 +22,7 @@ jobs:
              data_classification: "CONFIDENTIAL"
              
           repositories:
-            - name: Repo One
+            - name: Juice Shop
               local_path: /data
 
           config:
@@ -31,7 +31,6 @@ jobs:
             review_agent_llm: gpt-4o-mini
             threat_model_agent_llm: gpt-4o-mini
             report_agent_llm: gpt-4o-mini
-            categorize_only: True
           EOF
 
       - name: Generate Threat Model
