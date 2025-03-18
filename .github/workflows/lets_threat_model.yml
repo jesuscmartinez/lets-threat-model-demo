@@ -1,0 +1,67 @@
+name: Generate Threat Model
+
+on:
+  workflow_dispatch:
+
+jobs:
+  generate-threat-model:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Prepare test config file (Optional if you include default config)
+        run: |
+          mkdir -p config
+          cat <<EOF > config/config.yaml
+          asset:
+             name: "OWASP Juice Shop"
+             description: "An intentionally insecure web application for security training."
+             internet_facing: true
+             authn_type: "Password"
+             data_classification: "CONFIDENTIAL"
+             
+          repositories:
+            - name: Repo One
+              local_path: /data
+
+          config:
+            llm_provider: openai
+            categorization_agent_llm: gpt-4o-mini
+            review_agent_llm: gpt-4o-mini
+            threat_model_agent_llm: gpt-4o-mini
+            report_agent_llm: gpt-4o-mini
+            categorize_only: True
+          EOF
+
+      - name: Generate Threat Model
+        uses: jesuscmartinez/lets-threat-model-github-action@main
+        with:
+          config: config/config.yaml
+          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
+
+      - name: Verify the generated Markdown report exists
+        run: |
+          if [ -f "threat_model_report.md" ]; then
+            echo "✅ Markdown report generated."
+          else
+            echo "❌ Markdown report not found!"
+            exit 1
+          fi
+
+      - name: Verify the generated JSON report exists
+        run: |
+          if [ -f "threat_model_report.json" ]; then
+            echo "✅ JSON report generated."
+          else
+            echo "❌ JSON report not found!"
+            exit 1
+          fi
+
+      - name: Upload reports as artifacts (Optional)
+        uses: actions/upload-artifact@v4
+        with:
+          name: threat-model-reports
+          path: |
+            threat_model_report.md
+            threat_model_report.json
