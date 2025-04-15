@@ -76,3 +76,8 @@ jobs:
             threat_model_report.md
             threat_model_report.json
             threat_model_report.sarif
+            
+      - name: Upload SARIF file to GitHub Code Scanning
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: threat_model_report.sarif
