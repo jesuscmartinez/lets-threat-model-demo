@@ -34,7 +34,7 @@ jobs:
           EOF
 
       - name: Generate Threat Model
-        uses: jesuscmartinez/lets-threat-model-github-action@main
+        uses: jesuscmartinez/lets-threat-model-github-action@v1.0.1
         with:
           config: config/config.yaml
           openai-api-key: ${{ secrets.OPENAI_API_KEY }}
