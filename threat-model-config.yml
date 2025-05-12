@@ -15,3 +15,4 @@ config:
   review_agent_llm: o3-mini
   threat_model_agent_llm: o3-mini
   report_agent_llm: gpt-4o-mini
+  review_max_file_in_batch: 10
