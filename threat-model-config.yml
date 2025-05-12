@@ -1,0 +1,17 @@
+asset:
+  name: "Juice Shop"
+  description: "OWASP Juice Shop: Probably the most modern and sophisticated insecure web application"
+  internet_facing: true
+  authn_type: "Password"
+  data_classification: "CONFIDENTIAL"
+
+repositories:
+  - name: "juice-shop/juice-shop"
+    local_path: /data
+
+config:
+  llm_provider: openai
+  categorization_agent_llm: gpt-4o-mini
+  review_agent_llm: o3-mini
+  threat_model_agent_llm: o3-mini
+  report_agent_llm: gpt-4o-mini
