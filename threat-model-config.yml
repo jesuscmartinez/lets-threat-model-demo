@@ -12,7 +12,7 @@ repositories:
 config:
   llm_provider: openai
   categorization_agent_llm: gpt-4o-mini
-  review_agent_llm: o3-mini
-  threat_model_agent_llm: o3-mini
+  review_agent_llm: gpt-4o-mini
+  threat_model_agent_llm: gpt-4o-mini
   report_agent_llm: gpt-4o-mini
-  review_max_file_in_batch: 10
+  review_max_file_in_batch: 3
